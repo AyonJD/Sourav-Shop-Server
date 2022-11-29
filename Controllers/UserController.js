@@ -67,8 +67,8 @@ module.exports.loginUser = async (req, res) => {
 module.exports.getSingleUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await UserModel.findById(id);
-        const user_exclude_pass = await UserModel.findOne({ id }, { password: 0 });
+        // const result = await UserModel.findById(id);
+        const user_exclude_pass = await UserModel.findOne({ _id:id }, { password: 0 });
         res.status(200).json({ success: true, message: "Successfully fetched single user", result: {user: user_exclude_pass} });
     } catch (err) {
         res.status(500).json({ success: false, message: "Internal server error", error: err.message });
