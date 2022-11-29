@@ -6,6 +6,7 @@ require('dotenv').config();
 
 //import UserRoute from './Routes/UserRoute.js';
 const UserRoute = require('./Routes/UserRoute.js');
+const ServiceRoute = require('./Routes/ServiceRoute.js');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -23,7 +24,7 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.DATABASE_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-    }).then(() => console.log("Database connected successfully"))
+}).then(() => console.log("Database connected successfully"))
     .catch(err => console.log(err));
 
 app.listen(PORT, () => {
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
     res.send("Server is running");
 })
 app.use('/api/v1/auth/user', UserRoute);
+app.use('/api/v1/auth/service', ServiceRoute);
 
 //All
 app.all("*", (req, res) => {
