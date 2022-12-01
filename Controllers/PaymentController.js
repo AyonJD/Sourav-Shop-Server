@@ -10,12 +10,13 @@ module.exports.getPayment = async (req, res) => {
 }
 
 module.exports.createPayment = async (req, res) => {
-    const { user, service, package, invoiceId, paymentMethod, paymentStatus, paymentDate, paymentTime, paymentAmount, paymentNumber, paymentTrxNumber, confirmStatus } = await req.body;
+    const { user, gameInfo, service, pack, invoiceId, paymentMethod, paymentStatus, paymentDate, paymentTime, paymentAmount, paymentNumber, paymentTrxNumber, confirmStatus } = await req.body;
 
     const newPayment = new PaymentModel({
         user,
+        gameInfo,
         service,
-        package,
+        pack,
         invoiceId,
         paymentMethod,
         paymentStatus,
@@ -37,13 +38,13 @@ module.exports.createPayment = async (req, res) => {
 
 module.exports.updatePayment = async (req, res) => {
     const id = req.params.id;
-    const { user, service, package, invoiceId, paymentMethod, paymentStatus, paymentDate, paymentTime, paymentAmount, paymentNumber, paymentTrxNumber, confirmStatus } = await req.body;
+    const { user, service, pack, invoiceId, paymentMethod, paymentStatus, paymentDate, paymentTime, paymentAmount, paymentNumber, paymentTrxNumber, confirmStatus } = await req.body;
 
     try {
         const result = await PaymentModel.findByIdAndUpdate(id, {
             user,
             service,
-            package,
+            pack,
             invoiceId,
             paymentMethod,
             paymentStatus,

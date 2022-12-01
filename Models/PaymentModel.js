@@ -9,6 +9,10 @@ const PaymentSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
+    gameInfo: {
+        type: Object,
+        required: true
+    },
     package: {
         type: Object,
         required: true
