@@ -13,7 +13,7 @@ const PaymentSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
-    package: {
+    pack: {
         type: Object,
         required: true
     },
