@@ -73,6 +73,7 @@ module.exports.getSinglePayment = async (req, res) => {
 
 module.exports.getMyOrders = async (req, res) => {
     const { userId } = req.body;
+    console.log(userId);
     try {
         const result = await PaymentModel.find();
         const myOrders = result.filter(order => order.user._id === userId);
