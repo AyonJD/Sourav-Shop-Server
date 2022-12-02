@@ -70,3 +70,14 @@ module.exports.getSinglePayment = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error", error: err.message });
     }
 }
+
+module.exports.getMyOrders = async (req, res) => {
+    const { userId } = req.body;
+    try {
+        const result = await PaymentModel.find();
+        const myOrders = result.filter(order => order.user._id === userId);
+        res.status(200).json({ success: true, message: "Successfully fetched all my orders", result: myOrders });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Internal server error", error: err.message });
+    }
+}
