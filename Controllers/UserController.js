@@ -25,7 +25,7 @@ module.exports.createUser = async (req, res) => {
             const accessToken = jwt.sign(req.body, process.env.TOKEN, { expiresIn: "1d" });
             const result = await newUser.save();
             const { userName, email, _id } = result;
-            res.status(200).json({ success: true, message: "Successfully created user", token: accessToken, result: { userName, email, role, id:_id } });
+            res.status(200).json({ success: true, message: "Successfully created user", token: accessToken, result: { userName, email, role, id: _id } });
         }
 
     } catch (err) {
@@ -68,8 +68,25 @@ module.exports.getSingleUser = async (req, res) => {
     const { id } = req.params;
     try {
         // const result = await UserModel.findById(id);
-        const user_exclude_pass = await UserModel.findOne({ _id:id }, { password: 0 });
-        res.status(200).json({ success: true, message: "Successfully fetched single user", result: {user: user_exclude_pass} });
+        const user_exclude_pass = await UserModel.findOne({ _id: id }, { password: 0 });
+        res.status(200).json({ success: true, message: "Successfully fetched single user", result: { user: user_exclude_pass } });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Internal server error", error: err.message });
+    }
+}
+
+module.exports.updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { role } = req.body;
+    try {
+        const result = await UserModel.findOneAndUpdate({
+            _id: id
+        }, {
+            role
+        }, {
+            new: true
+        });
+        res.status(200).json({ success: true, message: "Successfully updated user", result });
     } catch (err) {
         res.status(500).json({ success: false, message: "Internal server error", error: err.message });
     }
