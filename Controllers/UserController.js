@@ -78,6 +78,7 @@ module.exports.getSingleUser = async (req, res) => {
 module.exports.updateUser = async (req, res) => {
     const { id } = req.params;
     const { role } = req.body;
+
     try {
         const result = await UserModel.findOneAndUpdate({
             _id: id
