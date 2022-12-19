@@ -8,6 +8,7 @@ const UserRoute = require('./Routes/UserRoute.js');
 const ServiceRoute = require('./Routes/ServiceRoute.js');
 const PaymentRoute = require('./Routes/PaymentRoute.js');
 const NumberRoute = require('./Routes/NumberRoute.js');
+const NotificationRoute = require('./Routes/NotificationRoute.js');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -40,6 +41,7 @@ app.use('/api/v1/auth/user', UserRoute);
 app.use('/api/v1/auth/service', ServiceRoute);
 app.use('/api/v1/auth/payment', PaymentRoute);
 app.use('/api/v1/auth/number', NumberRoute);
+app.use('/api/v1/auth/notification', NotificationRoute);
 
 //All
 app.all("*", (req, res) => {
